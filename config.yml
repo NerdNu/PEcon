@@ -1,0 +1,106 @@
+properties:
+  damage-timeout: 30
+  renew-damage: true
+  log-rewards: true
+  notify-rewards: true
+  money-format: $%.2f
+  players:
+    source-ratio: 1.0
+    defer-to-server: false
+    cooldown:
+      time: 7200
+      cooldown-function:
+        type: identity
+  mobs:
+    ignore-spawner-mobs: true
+    spawner-types:
+      blaze: true
+      cave_spider: true
+      silverfish: true
+      skeleton:
+        normal: true
+      spider: true
+      zombie: true
+values:
+  players:
+    curve:
+      type: polynomial
+      args: [1.0, 1.0]
+    armor:
+      type:
+        boots: 4.0
+        leggings: 7.0
+        chestplate: 8.0
+        helmet: 5.0
+      material:
+        leather: 1.0
+        chainmail: 1.1
+        gold: 1.2
+        iron: 1.3
+        diamond: 1.4
+      enchantment:
+        protection_environmental:
+          level-function:
+            type: polynomial
+            args: [1.0, 0.2]
+        default: 1.25
+      damage:
+        damage-function:
+          type: identity
+  mobs:
+    blaze: 0.0
+    cave_spider: 5.0
+    creeper: 10.0
+    ender_dragon: 500.0
+    enderman: 15.0
+    endermite: 10.0
+    ghast: 15.0
+    giant: 0.0
+    guardian: 15.0
+    magma_cube:
+      size-function:
+        type: constant
+        args: 10.0
+    pig_zombie: 10.0
+    rabbit:
+      the_killer_bunny: 15.0
+    silverfish: 15.0
+    skeleton:
+      normal: 10.0
+      wither: 15.0
+    slime:
+      size-function:
+        type: constant
+        args: 10.0
+    spider: 5.0
+    witch: 15.0
+    wither: 30.0
+    zombie: 10.0
+chances:
+  players:
+    curve:
+      type: constant
+      args: 1.0
+  mobs:
+    blaze: 1.0
+    cave_spider: 1.0
+    creeper: 1.0
+    ender_dragon: 1.0
+    enderman: 1.0
+    endermite: 1.0
+    ghast: 1.0
+    giant: 1.0
+    guardian: 1.0
+    magma_cube: 1.0
+    pig_zombie: 1.0
+    rabbit:
+      the_killer_bunny: 1.0
+    silverfish: 1.0
+    skeleton:
+      normal: 1.0
+      wither: 1.0
+    slime: 1.0
+    spider: 1.0
+    witch: 1.0
+    wither: 1.0
+    zombie: 1.0

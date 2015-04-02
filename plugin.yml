@@ -1,0 +1,11 @@
+name: ${project.name}
+main: nu.nerd.pecon.PEconPlugin
+version: ${project.version}
+description: ${project.description}
+website: ${project.url}
+database: false
+authors: [Dumbo52]
+depend: [Vault]
+commands:
+  pecon:
+    description: PvP Economy commands
