@@ -6,6 +6,7 @@ website: ${project.url}
 database: false
 authors: [Dumbo52]
 depend: [Vault]
+softdepend: [WorldGuard, WGCustomFlags]
 commands:
   pecon:
     description: PvP Economy commands

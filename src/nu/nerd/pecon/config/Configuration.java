@@ -10,6 +10,7 @@ import nu.nerd.pecon.config.properties.Properties;
 import nu.nerd.pecon.config.valuation.ConstantValuator;
 import nu.nerd.pecon.config.valuation.EntityValuator;
 import nu.nerd.pecon.config.valuation.Valuator;
+import nu.nerd.pecon.config.valuation.mob.MobValuator;
 
 /**
  * The plugin's configuration data.
@@ -36,8 +37,8 @@ public class Configuration {
         } else {
             values = new ConstantValuator<LivingEntity>(0.0);
         }
-        if (config.isConfigurationSection("mobs")) {
-            chances = new EntityValuator(config.getConfigurationSection("mobs"));
+        if (config.isConfigurationSection("chances.mobs")) {
+            chances = new MobValuator(config.getConfigurationSection("chances.mobs"));
         } else {
             chances = new ConstantValuator<LivingEntity>(0.0);
         }

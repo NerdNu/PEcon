@@ -64,6 +64,13 @@ public class CooldownList {
     }
 
     /**
+     * Removes all cooldown entries.
+     */
+    public void clear() {
+        cooldowns.clear();
+    }
+
+    /**
      * Resets the cooldown between the given killer and victim and returns a
      * (possibly) cooldown-modified version of the given reward amount.
      *

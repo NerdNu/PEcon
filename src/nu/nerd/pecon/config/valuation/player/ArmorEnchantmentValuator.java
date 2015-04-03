@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import nu.nerd.pecon.config.Configuration;
 import nu.nerd.pecon.config.valuation.CurvedValuator;
 import nu.nerd.pecon.config.valuation.Valuator;
 import nu.nerd.pecon.function.ConstantFunction;
@@ -34,9 +33,8 @@ public class ArmorEnchantmentValuator extends CurvedValuator<Map<Enchantment, In
      * are defined, the default enchantment value is used.
      * <p>
      * The configuration section may contain a <i>default</i> key with double
-     * value, which is used as an enchantment's value if the enchantment's type
-     * or level is not listed. If this key is not present, the value defaults
-     * to 1.
+     * value, onto which all enchantment values are added. If this key is not
+     * present, the value defaults to 0.
      *
      * @param config the configuration section
      * @see org.bukkit.enchantments.Enchantment
@@ -44,7 +42,7 @@ public class ArmorEnchantmentValuator extends CurvedValuator<Map<Enchantment, In
     public ArmorEnchantmentValuator(ConfigurationSection config) {
         super(config);
         valueMap = new HashMap<>();
-        defaultValue = Configuration.getDouble(config, "default", 1.0);
+        defaultValue = config.getDouble("default", 0.0);
         if (config != null) {
             for (String key : config.getKeys(false)) {
                 Enchantment enchant = Enchantment.getByName(key.toUpperCase());
@@ -58,15 +56,13 @@ public class ArmorEnchantmentValuator extends CurvedValuator<Map<Enchantment, In
 
     @Override
     protected double baseValue(Map<Enchantment, Integer> input) {
-        double multiplier = 1.0;
+        double sum = defaultValue;
         for (Entry<Enchantment, Integer> enchant : input.entrySet()) {
             if (valueMap.containsKey(enchant.getKey())) {
-                multiplier *= valueMap.get(enchant.getKey()).valuate(enchant.getValue());
-            } else {
-                multiplier *= defaultValue;
+                sum += valueMap.get(enchant.getKey()).valuate(enchant.getValue());
             }
         }
-        return multiplier;
+        return sum;
     }
 
     private static class LevelData implements Valuator<Integer> {

@@ -43,7 +43,6 @@ values:
           level-function:
             type: polynomial
             args: [1.0, 0.2]
-        default: 1.25
       damage:
         damage-function:
           type: identity

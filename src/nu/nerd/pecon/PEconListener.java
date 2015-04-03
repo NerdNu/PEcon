@@ -81,14 +81,20 @@ public class PEconListener implements Listener {
         LivingEntity entity = event.getEntity();
         Configuration config = PEconPlugin.getInstance().getPluginConfiguration();
 
-        if (entity.hasMetadata("pecon.lastdamage")
-                && entity.getWorld().getFullTime()
+        if (!entity.hasMetadata("pecon.lastdamage")) {
+            return;
+        }
+        if (entity.getWorld().getFullTime()
                 - entity.getMetadata("pecon.lastdamage").get(0).asLong()
-                <= PEconPlugin.getInstance().getPluginConfiguration().getProperties()
+                > PEconPlugin.getInstance().getPluginConfiguration().getProperties()
                 .getDamageTimeout() * 20) {
-            PEconPlugin.getInstance().getLogger().info(entity.getName() + " should reward: "
-                    + PEconPlugin.getInstance().getPluginConfiguration().getValues()
-                    .valuate(entity));
+            return;
+        }
+        if (!PEconPlugin.getInstance().allowsRewards(entity.getLocation())) {
+            return;
+        }
+
+        if (entity instanceof Player || Math.random() <= config.getChances().valuate(entity)) {
             double amount = config.getValues().valuate(entity);
             if (entity.hasMetadata("pecon.damagers")) {
                 PEconPlugin.getInstance().getEconomyManager().rewardPlayers(

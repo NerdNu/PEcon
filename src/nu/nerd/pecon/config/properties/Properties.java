@@ -77,6 +77,12 @@ public class Properties {
         return notifyRewards;
     }
 
+    /**
+     * Formats the given amount of money.
+     *
+     * @param amount the amount of money
+     * @return the formatted string
+     */
     public String formatMoney(double amount) {
         return String.format(moneyFormat, amount);
     }
