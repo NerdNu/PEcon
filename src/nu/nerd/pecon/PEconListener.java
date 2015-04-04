@@ -93,6 +93,9 @@ public class PEconListener implements Listener {
         if (!PEconPlugin.getInstance().allowsRewards(entity.getLocation())) {
             return;
         }
+        if (!config.getProperties().getMobProperties().shouldReward(entity)) {
+            return;
+        }
 
         if (entity instanceof Player || Math.random() <= config.getChances().valuate(entity)) {
             double amount = config.getValues().valuate(entity);
